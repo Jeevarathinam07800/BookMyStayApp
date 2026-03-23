@@ -1,35 +1,26 @@
-/**
- * ==========================================================
- * MAIN CLASS - UseCase6RoomAllocationService
- * ==========================================================
- *
- * Demonstrates reservation confirmation
- * and safe room allocation.
- *
- * @version 6.0
- */
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
 
-public class BookMyStayApp {
+class AddOnService {
+    private String serviceName;
+    private double price;
 
-    public static void main(String[] args) {
+    public AddOnService(String var1, double var2) {
+        this.serviceName = var1;
+        this.price = var2;
+    }
 
-        System.out.println("Room Allocation Processing");
+    public String getServiceName() {
+        return this.serviceName;
+    }
 
-        RoomInventory inventory = new RoomInventory();
+    public double getPrice() {
+        return this.price;
+    }
 
-        BookingRequestQueue bookingQueue = new BookingRequestQueue();
-
-        bookingQueue.addRequest(new Reservation("Abhi", "Single"));
-        bookingQueue.addRequest(new Reservation("Subha", "Single"));
-        bookingQueue.addRequest(new Reservation("Vanmathi", "Suite"));
-
-        RoomAllocationService allocationService = new RoomAllocationService();
-
-        while (bookingQueue.hasPendingRequests()) {
-
-            Reservation reservation = bookingQueue.getNextRequest();
-
-            allocationService.allocateRoom(reservation, inventory);
-        }
+    public String toString() {
+        return this.serviceName + " ($" + this.price + ")";
     }
 }

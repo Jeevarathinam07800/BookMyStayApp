@@ -1,30 +1,35 @@
 /**
  * ==========================================================
- * MAIN CLASS - UseCase4RoomSearch
+ * MAIN CLASS - UseCase6RoomAllocationService
  * ==========================================================
  *
- * Demonstrates searching available rooms.
+ * Demonstrates reservation confirmation
+ * and safe room allocation.
  *
- * @version 4.0
+ * @version 6.0
  */
 
-public class BookMyStayApp{
+public class BookMyStayApp {
 
     public static void main(String[] args) {
 
+        System.out.println("Room Allocation Processing");
+
         RoomInventory inventory = new RoomInventory();
 
-        Room singleRoom = new SingleRoom();
-        Room doubleRoom = new DoubleRoom();
-        Room suiteRoom = new SuiteRoom();
+        BookingRequestQueue bookingQueue = new BookingRequestQueue();
 
-        RoomSearchService searchService = new RoomSearchService();
+        bookingQueue.addRequest(new Reservation("Abhi", "Single"));
+        bookingQueue.addRequest(new Reservation("Subha", "Single"));
+        bookingQueue.addRequest(new Reservation("Vanmathi", "Suite"));
 
-        searchService.searchAvailableRooms(
-                inventory,
-                singleRoom,
-                doubleRoom,
-                suiteRoom
-        );
+        RoomAllocationService allocationService = new RoomAllocationService();
+
+        while (bookingQueue.hasPendingRequests()) {
+
+            Reservation reservation = bookingQueue.getNextRequest();
+
+            allocationService.allocateRoom(reservation, inventory);
+        }
     }
 }
